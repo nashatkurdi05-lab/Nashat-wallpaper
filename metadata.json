@@ -1,0 +1,5 @@
+{
+  "name": "AI Wallpaper Studio",
+  "description": "Generate stunning, unique PC wallpapers from your text descriptions using the power of Gemini's Nano Banana model. Describe your perfect background, and let AI bring it to life.",
+  "requestFramePermissions": []
+}

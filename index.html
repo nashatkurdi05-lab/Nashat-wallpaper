@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Wallpaper Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        /* Default: Dark Theme */
+        --background-primary: #111827; /* gray-900 */
+        --background-secondary: #1f2937; /* gray-800 */
+        --background-tertiary: #374151; /* gray-700 */
+        --background-quaternary: #4b5563; /* gray-600 */
+        --background-gradient-from: #111827;
+        --background-gradient-via: #111827;
+        --background-gradient-to: rgba(49, 46, 129, 0.5); /* indigo-900/50 */
+
+        --text-primary: #e5e7eb; /* gray-200 */
+        --text-secondary: #9ca3af; /* gray-400 */
+        --text-tertiary: #6b7280; /* gray-500 */
+        --text-accent: #ffffff;
+        --text-error: #f87171; /* red-400 */
+
+        --border-primary: #374151; /* gray-700 */
+        --border-secondary: #4b5563; /* gray-600 */
+        --border-accent: #6366f1; /* indigo-500 */
+        --border-error: rgba(239, 68, 68, 0.5);
+
+        --accent-primary: #4f46e5; /* indigo-600 */
+        --accent-primary-hover: #6366f1; /* indigo-500 */
+        --accent-secondary: #818cf8; /* indigo-400 */
+        --accent-disabled: #4b5563; /* gray-600 */
+        --accent-success: #22c55e; /* green-500 */
+        --accent-success-soft-bg: rgba(34, 197, 94, 0.2);
+        --accent-success-soft-text: #4ade80; /* green-400 */
+        --accent-error-soft-bg: rgba(239, 68, 68, 0.2);
+        
+        --shadow-color: rgba(0, 0, 0, 0.5);
+        --backdrop-blur-color: rgba(17, 24, 39, 0.5);
+      }
+      html[data-theme='light'] {
+        --background-primary: #ffffff;
+        --background-secondary: #f9fafb;
+        --background-tertiary: #f3f4f6;
+        --background-quaternary: #e5e7eb;
+        --background-gradient-from: #e5e7eb;
+        --background-gradient-via: #f9fafb;
+        --background-gradient-to: rgba(224, 231, 255, 0.5);
+        --text-primary: #1f2937;
+        --text-secondary: #4b5563;
+        --text-tertiary: #6b7280;
+        --text-accent: #ffffff;
+        --text-error: #ef4444;
+        --border-primary: #e5e7eb;
+        --border-secondary: #d1d5db;
+        --border-accent: #6366f1;
+        --border-error: rgba(239, 68, 68, 0.5);
+        --accent-primary: #4f46e5;
+        --accent-primary-hover: #6366f1;
+        --accent-secondary: #818cf8;
+        --accent-disabled: #d1d5db;
+        --accent-success: #16a34a;
+        --accent-success-soft-bg: rgba(22, 163, 74, 0.1);
+        --accent-success-soft-text: #15803d;
+        --accent-error-soft-bg: rgba(239, 68, 68, 0.1);
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --backdrop-blur-color: rgba(255, 255, 255, 0.5);
+      }
+      html[data-theme='amoled'] {
+        --background-primary: #000000;
+        --background-secondary: #0a0a0a;
+        --background-tertiary: #1a1a1a;
+        --background-quaternary: #2a2a2a;
+        --background-gradient-from: #000000;
+        --background-gradient-via: #000000;
+        --background-gradient-to: rgba(79, 70, 229, 0.3);
+        --text-primary: #e5e7eb;
+        --text-secondary: #9ca3af;
+        --text-tertiary: #6b7280;
+        --border-primary: #2a2a2a;
+        --border-secondary: #3a3a3a;
+        --border-accent: #818cf8;
+        --accent-primary: #6366f1;
+        --accent-primary-hover: #818cf8;
+        --accent-secondary: #a5b4fc;
+        --accent-disabled: #3a3a3a;
+        --backdrop-blur-color: rgba(0, 0, 0, 0.5);
+      }
+      html[data-theme='neon'] {
+        --background-primary: #0d0221;
+        --background-secondary: #1a0a38;
+        --background-tertiary: #2c125c;
+        --background-quaternary: #3d1a80;
+        --background-gradient-from: #0d0221;
+        --background-gradient-via: #2c125c;
+        --background-gradient-to: rgba(243, 6, 255, 0.3);
+        --text-primary: #f0f8ff;
+        --text-secondary: #a27bde;
+        --text-tertiary: #7c52b3;
+        --text-error: #ff3366;
+        --border-primary: #2c125c;
+        --border-secondary: #3d1a80;
+        --border-accent: #f306ff;
+        --accent-primary: #c132f0;
+        --accent-primary-hover: #e074ff;
+        --accent-secondary: #00f5d4;
+        --accent-disabled: #3d1a80;
+        --shadow-color: rgba(243, 6, 255, 0.3);
+        --backdrop-blur-color: rgba(13, 2, 33, 0.5);
+      }
+      html[data-theme='glass'] {
+        --background-primary: #1a1a1d;
+        --background-secondary: rgba(255, 255, 255, 0.05);
+        --background-tertiary: rgba(255, 255, 255, 0.1);
+        --background-quaternary: rgba(255, 255, 255, 0.15);
+        --background-gradient-from: #4e4e50;
+        --background-gradient-via: #1a1a1d;
+        --background-gradient-to: rgba(79, 70, 229, 0.3);
+        --text-primary: #f5f5f5;
+        --text-secondary: #c3c3c3;
+        --text-tertiary: #a1a1a1;
+        --text-error: #ff4d4d;
+        --border-primary: rgba(255, 255, 255, 0.1);
+        --border-secondary: rgba(255, 255, 255, 0.2);
+        --border-accent: #a855f7;
+        --accent-primary: #8b5cf6;
+        --accent-primary-hover: #a78bfa;
+        --accent-secondary: #a855f7;
+        --accent-disabled: rgba(255, 255, 255, 0.15);
+        --shadow-color: rgba(0, 0, 0, 0.2);
+        --backdrop-blur-color: rgba(26, 26, 29, 0.3);
+      }
+      html[data-theme='aurora'] {
+        --background-primary: #001f3f;
+        --background-secondary: #003366;
+        --background-tertiary: #004080;
+        --background-quaternary: #0059b3;
+        --background-gradient-from: #001f3f;
+        --background-gradient-via: #004080;
+        --background-gradient-to: rgba(118, 255, 245, 0.3);
+        --text-primary: #e0ffff;
+        --text-secondary: #7fffd4;
+        --text-tertiary: #40e0d0;
+        --text-error: #ff6347;
+        --border-primary: #004080;
+        --border-secondary: #0059b3;
+        --border-accent: #76f5f5;
+        --accent-primary: #20b2aa;
+        --accent-primary-hover: #48d1cc;
+        --accent-secondary: #76f5f5;
+        --accent-disabled: #0059b3;
+        --shadow-color: rgba(0, 31, 63, 0.5);
+        --backdrop-blur-color: rgba(0, 31, 63, 0.5);
+      }
+      html[data-theme='rose'] {
+        --background-primary: #fdf0f0;
+        --background-secondary: #fce4e4;
+        --background-tertiary: #f8d8d8;
+        --background-quaternary: #f5cdcd;
+        --background-gradient-from: #fdf0f0;
+        --background-gradient-via: #fce4e4;
+        --background-gradient-to: rgba(200, 162, 200, 0.3);
+        --text-primary: #5c3e3e;
+        --text-secondary: #8c5d5d;
+        --text-tertiary: #b07e7e;
+        --text-error: #d9534f;
+        --border-primary: #f5cdcd;
+        --border-secondary: #f2c2c2;
+        --border-accent: #b56576;
+        --accent-primary: #c8a2c8;
+        --accent-primary-hover: #d9b9d9;
+        --accent-secondary: #e56b6f;
+        --accent-disabled: #f5cdcd;
+        --shadow-color: rgba(181, 101, 118, 0.1);
+        --backdrop-blur-color: rgba(253, 240, 240, 0.5);
+      }
+      html[data-theme='cyberpunk'] {
+        --background-primary: #2a004f;
+        --background-secondary: #3f0071;
+        --background-tertiary: #520094;
+        --background-quaternary: #6500b8;
+        --background-gradient-from: #2a004f;
+        --background-gradient-via: #520094;
+        --background-gradient-to: rgba(0, 255, 255, 0.3);
+        --text-primary: #f0f0f0;
+        --text-secondary: #ff00ff;
+        --text-tertiary: #00ffff;
+        --text-error: #ffff00;
+        --border-primary: #520094;
+        --border-secondary: #6500b8;
+        --border-accent: #ff00ff;
+        --accent-primary: #ff00ff;
+        --accent-primary-hover: #ff55ff;
+        --accent-secondary: #00ffff;
+        --accent-disabled: #6500b8;
+        --shadow-color: rgba(82, 0, 148, 0.5);
+        --backdrop-blur-color: rgba(42, 0, 79, 0.5);
+      }
+      html[data-theme='forest'] {
+        --background-primary: #0a140a;
+        --background-secondary: #1a2c1a;
+        --background-tertiary: #2a432a;
+        --background-quaternary: #3a5b3a;
+        --background-gradient-from: #0a140a;
+        --background-gradient-via: #2a432a;
+        --background-gradient-to: rgba(244, 164, 96, 0.3);
+        --text-primary: #e8f5e9;
+        --text-secondary: #a5d6a7;
+        --text-tertiary: #81c784;
+        --text-error: #ef9a9a;
+        --border-primary: #2a432a;
+        --border-secondary: #3a5b3a;
+        --border-accent: #a5d6a7;
+        --accent-primary: #66bb6a;
+        --accent-primary-hover: #81c784;
+        --accent-secondary: #f4a460;
+        --accent-disabled: #3a5b3a;
+        --shadow-color: rgba(10, 20, 10, 0.5);
+        --backdrop-blur-color: rgba(10, 20, 10, 0.5);
+      }
+      html[data-theme='sand'] {
+        --background-primary: #fdf6e3;
+        --background-secondary: #f5eeda;
+        --background-tertiary: #eee8d5;
+        --background-quaternary: #e7e0c8;
+        --background-gradient-from: #fdf6e3;
+        --background-gradient-via: #eee8d5;
+        --background-gradient-to: rgba(42, 161, 152, 0.2);
+        --text-primary: #586e75;
+        --text-secondary: #839496;
+        --text-tertiary: #93a1a1;
+        --text-error: #dc322f;
+        --border-primary: #eee8d5;
+        --border-secondary: #e7e0c8;
+        --border-accent: #2aa198;
+        --accent-primary: #268bd2;
+        --accent-primary-hover: #2aa198;
+        --accent-secondary: #cb4b16;
+        --accent-disabled: #e7e0c8;
+        --shadow-color: rgba(88, 110, 117, 0.1);
+        --backdrop-blur-color: rgba(253, 246, 227, 0.5);
+      }
+      body {
+        background-color: var(--background-primary);
+      }
+      .shadow-themed {
+        box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
